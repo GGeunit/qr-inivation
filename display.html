@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>초대장 정보</title>
+</head>
+<body>
+    <h1>초대장 정보</h1>
+    <p id="name"></p>
+    <p id="department"></p>
+    <p id="year"></p>
+    <script>
+        // URL 쿼리 파라미터에서 정보 가져오기
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                name: params.get('name'),
+                department: params.get('department'),
+                year: params.get('year')
+            };
+        }
+
+        // 정보를 HTML 요소에 표시
+        const params = getQueryParams();
+        document.getElementById('name').innerText = `이름: ${decodeURIComponent(params.name)}`;
+        document.getElementById('department').innerText = `학과: ${decodeURIComponent(params.department)}`;
+        document.getElementById('year').innerText = `학년: ${decodeURIComponent(params.year)}`;
+    </script>
+</body>
+</html>

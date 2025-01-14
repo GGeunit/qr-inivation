@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR 코드 생성기</title>
+</head>
+<body>
+    <h1>초대장 QR 코드 생성기</h1>
+    <form id="qrForm">
+        <label for="name">이름:</label>
+        <input type="text" id="name" name="name" required>
+        <br>
+        <label for="department">학과:</label>
+        <input type="text" id="department" name="department" required>
+        <br>
+        <label for="year">학년:</label>
+        <input type="text" id="year" name="year" required>
+        <br>
+        <button type="submit">QR 생성</button>
+    </form>
+    <div id="qrcode"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script>
+        document.getElementById('qrForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // 폼 제출 방지
+
+            // 사용자 입력값 가져오기
+            var name = document.getElementById('name').value.trim();
+            var department = document.getElementById('department').value.trim();
+            var year = document.getElementById('year').value.trim();
+
+            // QR 코드 내용 생성 (웹 페이지 URL + 쿼리 파라미터)
+            var qrContent = `http://localhost:8000/display.html?name=${encodeURIComponent(name)}&department=${encodeURIComponent(department)}&year=${encodeURIComponent(year)}`;
+
+            // 이전 QR 코드 제거 (기존 QR 코드가 있을 경우)
+            var qrcodeContainer = document.getElementById("qrcode");
+            qrcodeContainer.innerHTML = "";
+
+            // QR 코드 생성
+            new QRCode(qrcodeContainer, {
+                text: qrContent,
+                width: 128,
+                height: 128,
+                version: 10 // QR 코드 버전 설정 (필요에 따라 조정)
+            });
+        });
+    </script>
+</body>
+</html>
