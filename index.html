@@ -31,7 +31,7 @@
             var year = document.getElementById('year').value.trim();
 
             // QR 코드 내용 생성 (웹 페이지 URL + 쿼리 파라미터)
-            var qrContent = `http://localhost:8000/display.html?name=${encodeURIComponent(name)}&department=${encodeURIComponent(department)}&year=${encodeURIComponent(year)}`;
+            var qrContent = `https://ggeunit.github.io/qr-invitation/display.html?name=${encodeURIComponent(name)}&department=${encodeURIComponent(department)}&year=${encodeURIComponent(year)}`;
 
             // 이전 QR 코드 제거 (기존 QR 코드가 있을 경우)
             var qrcodeContainer = document.getElementById("qrcode");
@@ -41,8 +41,7 @@
             new QRCode(qrcodeContainer, {
                 text: qrContent,
                 width: 128,
-                height: 128,
-                version: 10 // QR 코드 버전 설정 (필요에 따라 조정)
+                height: 128
             });
         });
     </script>
